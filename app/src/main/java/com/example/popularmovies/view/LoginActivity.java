@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Login successful with email " + loginModel.getUserEmail(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(LoginActivity.this, MovieActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
