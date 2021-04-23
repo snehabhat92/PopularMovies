@@ -1,19 +1,17 @@
 package com.example.popularmovies.view;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 
 import com.example.popularmovies.R;
-import com.example.popularmovies.databinding.ActivityLoginBinding;
+import com.example.popularmovies.databinding.ActivityMovieBinding;
 import com.example.popularmovies.model.MovieModel;
 import com.example.popularmovies.viewModel.MovieViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -22,16 +20,16 @@ import androidx.recyclerview.widget.RecyclerView;
 public class MovieActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private MovieAdapter adapter;
+    private ActivityMovieBinding binding;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie);
-        recyclerView=findViewById(R.id.recyclerview);
+        binding = DataBindingUtil.setContentView(MovieActivity.this, R.layout.activity_movie);
+        binding.setLifecycleOwner(this);
+
         GridLayoutManager layoutManager=new GridLayoutManager(MovieActivity.this,2);
-        recyclerView.setLayoutManager(layoutManager);
-        /*adapter = new MovieAdapter(MovieActivity.this, new ArrayList<MovieModel.Movie>());
-        recyclerView.setAdapter(adapter);*/
+                binding.recyclerview.setLayoutManager(layoutManager);
         initView();
     }
 
@@ -42,7 +40,7 @@ public class MovieActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable List<MovieModel.Movie> movies) {
                 adapter = new MovieAdapter(MovieActivity.this, movies);
-                recyclerView.setAdapter(adapter);
+                binding.recyclerview.setAdapter(adapter);
 
             }
         });

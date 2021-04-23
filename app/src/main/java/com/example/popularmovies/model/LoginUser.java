@@ -1,8 +1,6 @@
 package com.example.popularmovies.model;
 
 
-import android.util.Patterns;
-
 public class LoginUser {
 
     private String userEmail;
